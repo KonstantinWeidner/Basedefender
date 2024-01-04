@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://btimifsk3et2n"]
+
+[ext_resource type="Script" path="res://TowerDefense.gd" id="1_o2fse"]
+[ext_resource type="PackedScene" uid="uid://dx6f3ltk6brjj" path="res://Scenes/UI/menu.tscn" id="2_ud1eb"]
+
+[node name="SceneHandler" type="Node"]
+script = ExtResource("1_o2fse")
+
+[node name="Menu" parent="." instance=ExtResource("2_ud1eb")]

@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://cubn2x83cgx04"]
+
+[ext_resource type="PackedScene" uid="uid://btips1eu2m7eb" path="res://Scenes/map_1.tscn" id="1_5nqbg"]
+[ext_resource type="Script" path="res://Scenes/game_scene.gd" id="1_yc5q3"]
+[ext_resource type="Texture2D" uid="uid://blk5hmg3q4p1f" path="res://Assets/UI/buttonSquare_blue.png" id="2_ayu3g"]
+[ext_resource type="Script" path="res://Scenes/UI.gd" id="3_21h4m"]
+[ext_resource type="Texture2D" uid="uid://dpl5w6o6ixj62" path="res://Assets/CharakterAssets/Alchemist_Idle Down_1.png" id="4_ch666"]
+[ext_resource type="Texture2D" uid="uid://das2a073xocj3" path="res://Assets/UI/71b3a1ddbd72a0927b4a910d13988c31_t-removebg-preview.png" id="6_7cpq6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4duwd"]
+size = Vector2(383.763, 319.802)
+
+[node name="GameScene" type="Node2D"]
+script = ExtResource("1_yc5q3")
+
+[node name="Map1" parent="." instance=ExtResource("1_5nqbg")]
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("3_21h4m")
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Mage" type="TextureButton" parent="UI/HUD" groups=["build_buttons"]]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 5.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.8, 0.6)
+size_flags_horizontal = 0
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture_normal = ExtResource("2_ayu3g")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="UI/HUD/Mage"]
+layout_mode = 0
+offset_left = 1.33333
+offset_top = -56.0
+offset_right = 44.3333
+offset_bottom = 33.0
+texture = ExtResource("4_ch666")
+
+[node name="Castle" type="Sprite2D" parent="."]
+position = Vector2(620, 313)
+scale = Vector2(0.297059, 0.297059)
+texture = ExtResource("6_7cpq6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Castle"]
+shape = SubResource("RectangleShape2D_4duwd")
