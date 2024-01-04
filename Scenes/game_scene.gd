@@ -7,6 +7,8 @@ var build_valid = false
 var build_location
 var build_type
 
+var HP = 10
+
 var current_wave = 0
 var enemies_in_wave = 0
 
@@ -19,7 +21,7 @@ func _ready():
 	for i in get_tree().get_nodes_in_group("build_buttons"):
 		i.pressed.connect(initiate_build_mode.bind(i.name))
 	#start_next_wave()
-	
+
 	add_child(enemy_manager_instance)	#adds enemy manager which spawns enemy
 
 func _process(delta):
@@ -64,6 +66,10 @@ func verify_and_build():
 		new_character.built = true
 		map_node.get_node("Charakters").add_child(new_character, true)
 
+
+
+
+
 ## Enemie spawning Functions - not used atm
 
 func start_next_wave():#not used atm
@@ -84,3 +90,11 @@ func spawn_enemies(wave_data):#not used atm
 		await(get_tree().create_timer(i[1])).timeout
 		
 
+
+
+func _on_area_2d_area_entered(area): #recognition when enemy hits castle 
+	HP -= 1
+	print("hit")
+	if HP == 0:
+		print("defeat")
+#logic for loosing hp

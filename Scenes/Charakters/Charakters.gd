@@ -17,7 +17,7 @@ func _physics_process(delta):
 
 func turn():
 	var enemy_position = get_global_mouse_position()
-	get_node("MageText").look_at(enemy.position) #das später zu zielen bzw feuern ändern
+	get_node("MageText").look_at(Vector2(0,0)) #das später zu zielen bzw feuern ändern
 	
 func _on_area_2d_body_entered(body):
 	enemy_array.append(body)

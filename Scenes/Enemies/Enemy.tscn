@@ -1,63 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfqdlq1c6u5i3"]
+[gd_scene load_steps=4 format=3 uid="uid://dfqdlq1c6u5i3"]
 
-[ext_resource type="Texture2D" uid="uid://f70f8h4by85r" path="res://Assets/CharakterAssets/Enemies/Zombie3.png" id="1_i28qy"]
-[ext_resource type="Texture2D" uid="uid://qwp5dklwnn8q" path="res://Assets/CharakterAssets/Enemies/Zombie4.png" id="2_pql8v"]
+[ext_resource type="Script" path="res://Enemy.gd" id="1_0aj1m"]
+[ext_resource type="Texture2D" uid="uid://jmncjdtcgtje" path="res://Assets/CharakterAssets/Enemies/Zombie.png" id="2_ssitg"]
 
-[sub_resource type="GDScript" id="GDScript_eo2dv"]
-script/source = "extends CharacterBody2D
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wni6g"]
+size = Vector2(14, 20)
 
-var speed = 100  # Geschwindigkeit des Gegners
-var target_position = Vector2(830, 313)
+[node name="Zombie" type="CharacterBody2D"]
+script = ExtResource("1_0aj1m")
 
-func _physics_process(delta):
-	_process(delta)
-	#print(\"Target Position:\", target_position)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ssitg")
 
-func _process(delta):
-	# Berechne die Richtung zum Ziel
-	var direction = (target_position).normalized()
-	var velocity = direction * speed
-	#print(\"Direction:\", direction)
-	#print(\"Velocity:\", velocity)
-	position += velocity * delta
+[node name="Area2D" type="Area2D" parent="."]
 
-func on_hit_obj():
-	on_destroy()
-	
-func on_hit_char():
-	on_destroy()
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_wni6g")
 
-func on_destroy():
-	self.queue_free()
-"
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_5ptwb"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_i28qy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_pql8v")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3qrhu"]
-radius = 9.0
-height = 24.0
-
-[node name="Node2D" type="CharacterBody2D"]
-script = SubResource("GDScript_eo2dv")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-process_mode = 3
-sprite_frames = SubResource("SpriteFrames_5ptwb")
-frame_progress = 0.824555
-
-[node name="Hitbox" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_3qrhu")
-
-[connection signal="child_entered_tree" from="Hitbox" to="." method="_on_hitbox_child_entered_tree"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="child_entered_tree" from="Area2D/CollisionShape2D" to="." method="_on_collision_shape_2d_child_entered_tree"]
+[connection signal="tree_entered" from="Area2D/CollisionShape2D" to="." method="_on_collision_shape_2d_tree_entered"]
