@@ -1,0 +1,12 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://c4jusp4dpbwya"]
+
+[ext_resource type="FontFile" uid="uid://bcvj7wj8h2f67" path="res://Assets/Fonts/runescape_uf.ttf" id="1_26hbn"]
+
+[resource]
+font = ExtResource("1_26hbn")
+font_size = 35
+font_color = Color(0.988235, 0.878431, 0.580392, 1)
+outline_size = 10
+outline_color = Color(0.192157, 0.192157, 0.192157, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)

@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://bd601f6vr2cts"]
+
+[ext_resource type="Script" path="res://Scenes/Charakters/Meele.gd" id="1_p76ks"]
+[ext_resource type="Texture2D" uid="uid://co76e0eb2rs68" path="res://Assets/CharakterAssets/Charakters/Meele/SwordElf-outline1.png" id="2_u0wpw"]
+[ext_resource type="Texture2D" uid="uid://7waxat237wpb" path="res://Assets/CharakterAssets/Charakters/Meele/SwordElf-outline2.png" id="3_1a3a3"]
+[ext_resource type="Texture2D" uid="uid://dktkdt68nuh2x" path="res://Assets/CharakterAssets/Charakters/Meele/SwordElf-outline3.png" id="4_c8ty5"]
+[ext_resource type="Texture2D" uid="uid://dvv333qw5gf1r" path="res://Assets/CharakterAssets/Charakters/Meele/SwordElf-outline4.png" id="5_qyqxk"]
+[ext_resource type="Texture2D" uid="uid://bymyd4t024y0o" path="res://Assets/UI/RandIndic.png" id="6_h32et"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_54xhi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_u0wpw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1a3a3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_c8ty5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qyqxk")
+}],
+"loop": true,
+"name": &"Standing",
+"speed": 4.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vboli"]
+radius = 26.0192
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_p76ks")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_54xhi")
+animation = &"Standing"
+autoplay = "Standing"
+frame_progress = 0.61695
+
+[node name="Area2D" type="Area2D" parent="AnimatedSprite2D"]
+position = Vector2(-2, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/Area2D"]
+position = Vector2(2, 1)
+shape = SubResource("CircleShape2D_vboli")
+
+[node name="RangeIndicator" type="Sprite2D" parent="AnimatedSprite2D/Area2D/CollisionShape2D"]
+position = Vector2(-2, 1)
+scale = Vector2(0.127745, 0.124498)
+texture = ExtResource("6_h32et")
+
+[connection signal="body_entered" from="AnimatedSprite2D/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="mouse_entered" from="AnimatedSprite2D/Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="AnimatedSprite2D/Area2D" to="." method="_on_area_2d_mouse_exited"]

@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://dfqdlq1c6u5i3"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/Enemy.gd" id="1_hrl07"]
+[ext_resource type="Texture2D" uid="uid://jmncjdtcgtje" path="res://Assets/CharakterAssets/Enemies/Zombie.png" id="2_ssitg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wni6g"]
+size = Vector2(14, 20)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_32lmq"]
+radius = 7.0
+height = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8i705"]
+radius = 70.0286
+
+[node name="Zombie" type="CharacterBody2D" groups=["Enemy"]]
+script = ExtResource("1_hrl07")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ssitg")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_wni6g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_32lmq")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="SearchCircle" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SearchCircle"]
+shape = SubResource("CircleShape2D_8i705")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="child_entered_tree" from="Area2D/CollisionShape2D" to="." method="_on_collision_shape_2d_child_entered_tree"]
+[connection signal="tree_entered" from="Area2D/CollisionShape2D" to="." method="_on_collision_shape_2d_tree_entered"]
+[connection signal="area_entered" from="SearchCircle" to="." method="_on_search_circle_area_entered"]
+[connection signal="area_exited" from="SearchCircle" to="." method="_on_search_circle_area_exited"]
+[connection signal="body_entered" from="SearchCircle" to="." method="_on_search_circle_body_entered"]

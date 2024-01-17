@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://nh8e2mmijjk6"]
+
+[ext_resource type="Script" path="res://Node2D.gd" id="1_y7d0n"]
+[ext_resource type="Texture2D" uid="uid://de3v3eepiubxb" path="res://Assets/MapAssets/Tiles/tile_0047.png" id="2_efsf1"]
+[ext_resource type="Texture2D" uid="uid://cb67pgc1d7y4l" path="res://Assets/MapAssets/Tiles/tile_0081.png" id="3_gxgq6"]
+
+[sub_resource type="Curve2D" id="Curve2D_rahrb"]
+
+[node name="Path2D" type="Path2D"]
+curve = SubResource("Curve2D_rahrb")
+script = ExtResource("1_y7d0n")
+
+[node name="PointA" type="Marker2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="PointA"]
+texture = ExtResource("2_efsf1")
+
+[node name="PointB" type="Marker2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="PointB"]
+texture = ExtResource("2_efsf1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_gxgq6")

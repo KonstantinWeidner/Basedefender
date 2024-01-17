@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://00qvywj00520"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/EnemyManager.gd" id="1_q68aa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a37uj"]
+size = Vector2(242, 126)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_q68aa")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="ExcludedArea" type="Area2D" parent="."]
+position = Vector2(644, -6)
+scale = Vector2(5, 5)
+
+[node name="NOSpawnZone" type="CollisionShape2D" parent="ExcludedArea"]
+position = Vector2(-0.999992, 71.2)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_a37uj")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

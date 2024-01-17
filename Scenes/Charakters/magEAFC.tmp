@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckwdget8j4tdh"]
+
+[ext_resource type="Script" path="res://Scenes/Charakters/mage.gd" id="1_5sbt3"]
+[ext_resource type="Texture2D" uid="uid://dpl5w6o6ixj62" path="res://Assets/CharakterAssets/Alchemist_Idle Down_1.png" id="1_esmuy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j1byo"]
+radius = 60.0
+
+[node name="MageT1" type="Node2D"]
+script = ExtResource("1_5sbt3")
+
+[node name="MageText" type="Sprite2D" parent="."]
+texture = ExtResource("1_esmuy")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_j1byo")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

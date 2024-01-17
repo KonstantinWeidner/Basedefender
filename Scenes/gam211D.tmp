@@ -1,0 +1,274 @@
+[gd_scene load_steps=16 format=3 uid="uid://cubn2x83cgx04"]
+
+[ext_resource type="PackedScene" uid="uid://btips1eu2m7eb" path="res://Scenes/map_1.tscn" id="1_5nqbg"]
+[ext_resource type="Script" path="res://Scenes/game_scene.gd" id="1_yc5q3"]
+[ext_resource type="Texture2D" uid="uid://blk5hmg3q4p1f" path="res://Assets/UI/buttonSquare_blue.png" id="2_ayu3g"]
+[ext_resource type="Script" path="res://Scenes/UI.gd" id="3_21h4m"]
+[ext_resource type="Texture2D" uid="uid://cdaxpl2kypfs0" path="res://Assets/CharakterAssets/Mage1.png" id="5_2owko"]
+[ext_resource type="Texture2D" uid="uid://bnbnlioe2fok0" path="res://Assets/UI/Castle.png" id="6_7cpq6"]
+[ext_resource type="Script" path="res://Scenes/Castle.gd" id="6_jsuhw"]
+[ext_resource type="LabelSettings" uid="uid://c4jusp4dpbwya" path="res://Assets/UI/CharacterText.tres" id="6_mn02w"]
+[ext_resource type="Texture2D" uid="uid://ecwq4wn1wsyn" path="res://Assets/CharakterAssets/Meele1.png" id="6_x5his"]
+[ext_resource type="Texture2D" uid="uid://c6b7ou8on72xh" path="res://Assets/CharakterAssets/Tank.png" id="7_3xg01"]
+[ext_resource type="Texture2D" uid="uid://blslwscmthjon" path="res://Assets/CharakterAssets/Miner.png" id="8_j28gj"]
+[ext_resource type="Theme" uid="uid://kwad2sw0bmc1" path="res://Assets/UI/HPBarTheme.tres" id="11_1vmyv"]
+[ext_resource type="PackedScene" uid="uid://cap76vqms4r2j" path="res://Scenes/UI/death_screen.tscn" id="13_i1y4i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4duwd"]
+size = Vector2(380.396, 299.604)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gqsv7"]
+size = Vector2(316.435, 265.94)
+
+[node name="GameScene" type="Node2D"]
+script = ExtResource("1_yc5q3")
+
+[node name="Map1" parent="." instance=ExtResource("1_5nqbg")]
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("3_21h4m")
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Mage" type="TextureButton" parent="UI/HUD" groups=["build_buttons"]]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -83.0
+offset_top = -46.0
+offset_right = -38.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.8, 0.6)
+size_flags_horizontal = 0
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture_normal = ExtResource("2_ayu3g")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="UI/HUD/Mage"]
+layout_mode = 0
+offset_left = -7.49998
+offset_top = -43.3333
+offset_right = 52.5
+offset_bottom = 39.6667
+texture = ExtResource("5_2owko")
+
+[node name="Label" type="Label" parent="UI/HUD/Mage"]
+layout_mode = 0
+offset_left = 3.75002
+offset_top = -136.667
+offset_right = 171.75
+offset_bottom = -12.6666
+text = "Makes enemy in Range magicly disappear
+
+Static, invincable 
+500g"
+label_settings = ExtResource("6_mn02w")
+vertical_alignment = 1
+autowrap_mode = 1
+clip_text = true
+
+[node name="MeeleSpawner" type="TextureButton" parent="UI/HUD" groups=["build_buttons"]]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -46.0
+offset_right = 77.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.8, 0.6)
+size_flags_horizontal = 0
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture_normal = ExtResource("2_ayu3g")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="UI/HUD/MeeleSpawner"]
+layout_mode = 0
+offset_left = -14.0
+offset_top = -45.0
+offset_right = 58.0
+offset_bottom = 43.0
+texture = ExtResource("6_x5his")
+
+[node name="Label" type="Label" parent="UI/HUD/MeeleSpawner"]
+layout_mode = 0
+offset_top = -117.333
+offset_right = 229.0
+offset_bottom = -30.3333
+text = "Roams between 2 moveable posts, destroys enemy on impact
+
+Moving, 15HP
+150g"
+label_settings = ExtResource("6_mn02w")
+vertical_alignment = 1
+autowrap_mode = 1
+clip_text = true
+
+[node name="Tank" type="TextureButton" parent="UI/HUD" groups=["build_buttons"]]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 149.0
+offset_top = -46.0
+offset_right = 194.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.8, 0.6)
+size_flags_horizontal = 0
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture_normal = ExtResource("2_ayu3g")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="UI/HUD/Tank"]
+layout_mode = 0
+offset_left = -9.99998
+offset_top = -61.6668
+offset_right = 57.0
+offset_bottom = 50.3332
+texture = ExtResource("7_3xg01")
+
+[node name="Label" type="Label" parent="UI/HUD/Tank"]
+layout_mode = 0
+offset_top = -115.0
+offset_right = 208.0
+offset_bottom = -33.0
+text = "Roams in a circle, destroys enemy on impact
+
+Moving, 30HP
+300g"
+label_settings = ExtResource("6_mn02w")
+vertical_alignment = 1
+autowrap_mode = 1
+clip_text = true
+
+[node name="Miner" type="TextureButton" parent="UI/HUD" groups=["build_buttons"]]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -201.0
+offset_top = -47.0
+offset_right = -156.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.8, 0.6)
+size_flags_horizontal = 0
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture_normal = ExtResource("2_ayu3g")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="UI/HUD/Miner"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -81.1666
+offset_right = 33.0
+offset_bottom = 18.8334
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_j28gj")
+
+[node name="Label" type="Label" parent="UI/HUD/Miner"]
+layout_mode = 0
+offset_top = -115.0
+offset_right = 201.0
+offset_bottom = -33.0
+text = "Farms Pots to get gold,
+will get focused by enemy
+
+Moveable, 5HP, 
+50g"
+label_settings = ExtResource("6_mn02w")
+vertical_alignment = 1
+autowrap_mode = 1
+clip_text = true
+
+[node name="MoneyDisplay" type="Label" parent="UI/HUD"]
+layout_mode = 0
+offset_left = 546.0
+offset_top = 7.0
+offset_right = 670.0
+offset_bottom = 37.0
+text = "moneten"
+horizontal_alignment = 1
+
+[node name="Castle" type="CharacterBody2D" parent="." groups=["Castle"]]
+position = Vector2(620, 314)
+scale = Vector2(0.297059, 0.297059)
+script = ExtResource("6_jsuhw")
+
+[node name="Castle" type="Sprite2D" parent="Castle" groups=["Castle"]]
+texture = ExtResource("6_7cpq6")
+
+[node name="Area2D" type="Area2D" parent="Castle" groups=["Castle"]]
+
+[node name="CastleCollision" type="CollisionShape2D" parent="Castle/Area2D" groups=["Castle"]]
+position = Vector2(-11.7822, 15.1487)
+shape = SubResource("RectangleShape2D_4duwd")
+
+[node name="CastleShape" type="CollisionShape2D" parent="Castle" groups=["Castle"]]
+position = Vector2(-20.1978, 11.7825)
+shape = SubResource("RectangleShape2D_gqsv7")
+
+[node name="Healthbar" type="ProgressBar" parent="Castle"]
+offset_left = -131.0
+offset_top = 172.0
+offset_right = 111.0
+offset_bottom = 196.0
+theme = ExtResource("11_1vmyv")
+theme_override_constants/outline_size = 0
+max_value = 10.0
+value = 10.0
+show_percentage = false
+
+[node name="DeathScreen" parent="." instance=ExtResource("13_i1y4i")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 1
+size_flags_horizontal = 4
+
+[connection signal="mouse_entered" from="UI/HUD/Mage" to="." method="_on_mage_mouse_entered"]
+[connection signal="mouse_exited" from="UI/HUD/Mage" to="." method="_on_mage_mouse_exited"]
+[connection signal="mouse_entered" from="UI/HUD/MeeleSpawner" to="." method="_on_meele_spawner_mouse_entered"]
+[connection signal="mouse_exited" from="UI/HUD/MeeleSpawner" to="." method="_on_meele_spawner_mouse_exited"]
+[connection signal="mouse_entered" from="UI/HUD/Tank" to="." method="_on_tank_mouse_entered"]
+[connection signal="mouse_exited" from="UI/HUD/Tank" to="." method="_on_tank_mouse_exited"]
+[connection signal="mouse_entered" from="UI/HUD/Miner" to="." method="_on_miner_mouse_entered"]
+[connection signal="mouse_exited" from="UI/HUD/Miner" to="." method="_on_miner_mouse_exited"]

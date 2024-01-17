@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://qutuxi2jog8b"]
+
+[ext_resource type="Script" path="res://Scenes/Charakters/Miner.gd" id="1_ckppq"]
+[ext_resource type="Texture2D" uid="uid://blslwscmthjon" path="res://Assets/CharakterAssets/Miner.png" id="2_8dign"]
+[ext_resource type="Texture2D" uid="uid://blyyi3a1ph2oa" path="res://Assets/UI/RangeIndicator.png" id="3_wu1il"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g0631"]
+radius = 60.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gg275"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8dign")
+}],
+"loop": true,
+"name": &"Standing",
+"speed": 4.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ea7ul"]
+radius = 120.266
+
+[node name="Node2D" type="Node2D" groups=["Miner"]]
+script = ExtResource("1_ckppq")
+
+[node name="Area2D" type="Area2D" parent="." groups=["Miner"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["Miner"]]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_g0631")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["Miner"]]
+sprite_frames = SubResource("SpriteFrames_gg275")
+animation = &"Standing"
+autoplay = "Standing"
+
+[node name="RangeIndicator" type="Sprite2D" parent="."]
+position = Vector2(1.00001, 12.5)
+scale = Vector2(0.560659, 0.886574)
+texture = ExtResource("3_wu1il")
+
+[node name="SearchRadius" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SearchRadius"]
+shape = SubResource("CircleShape2D_ea7ul")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="body_entered" from="SearchRadius" to="." method="_on_search_radius_body_entered"]

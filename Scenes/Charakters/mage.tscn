@@ -1,16 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckwdget8j4tdh"]
+[gd_scene load_steps=9 format=3 uid="uid://ckwdget8j4tdh"]
 
-[ext_resource type="Script" path="res://Scenes/Charakters/mage.gd" id="1_5sbt3"]
-[ext_resource type="Texture2D" uid="uid://dpl5w6o6ixj62" path="res://Assets/CharakterAssets/Alchemist_Idle Down_1.png" id="1_esmuy"]
+[ext_resource type="Script" path="res://Scenes/Charakters/Mage.gd" id="1_xeqy0"]
+[ext_resource type="Texture2D" uid="uid://bymyd4t024y0o" path="res://Assets/UI/RandIndic.png" id="2_d4cx5"]
+[ext_resource type="Texture2D" uid="uid://w0hanpa5703p" path="res://Assets/CharakterAssets/Charakters/Mage/StaffHero-outline1.png" id="3_ex1vp"]
+[ext_resource type="Texture2D" uid="uid://bfl1bjyvna5qc" path="res://Assets/CharakterAssets/Charakters/Mage/StaffHero-outline2.png" id="4_pv8ss"]
+[ext_resource type="Texture2D" uid="uid://dl25yvkff4xps" path="res://Assets/CharakterAssets/Charakters/Mage/StaffHero-outline3.png" id="5_c0u2j"]
+[ext_resource type="Texture2D" uid="uid://cf6hn1g52g3us" path="res://Assets/CharakterAssets/Charakters/Mage/StaffHero-outline4.png" id="6_sj5ww"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j1byo"]
-radius = 100.0
+radius = 60.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wlu2r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ex1vp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_pv8ss")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_c0u2j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_sj5ww")
+}],
+"loop": true,
+"name": &"Standing",
+"speed": 4.0
+}]
 
 [node name="MageT1" type="Node2D"]
-script = ExtResource("1_5sbt3")
-
-[node name="MageText" type="Sprite2D" parent="."]
-texture = ExtResource("1_esmuy")
+script = ExtResource("1_xeqy0")
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -18,5 +39,20 @@ texture = ExtResource("1_esmuy")
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_j1byo")
 
+[node name="RangeIndicator" type="Sprite2D" parent="Area2D"]
+position = Vector2(-0.222527, 0.999999)
+scale = Vector2(0.296298, 0.285141)
+texture = ExtResource("2_d4cx5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.3113e-06, -0.5)
+scale = Vector2(1.125, 1.21875)
+sprite_frames = SubResource("SpriteFrames_wlu2r")
+animation = &"Standing"
+autoplay = "Standing"
+frame_progress = 0.647048
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

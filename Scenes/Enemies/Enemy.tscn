@@ -1,22 +1,70 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfqdlq1c6u5i3"]
+[gd_scene load_steps=10 format=3 uid="uid://dfqdlq1c6u5i3"]
 
-[ext_resource type="Script" path="res://Enemy.gd" id="1_0aj1m"]
-[ext_resource type="Texture2D" uid="uid://jmncjdtcgtje" path="res://Assets/CharakterAssets/Enemies/Zombie.png" id="2_ssitg"]
+[ext_resource type="Script" path="res://Scenes/Enemies/Enemy.gd" id="1_hrl07"]
+[ext_resource type="Texture2D" uid="uid://b7vsx0dfn5o8v" path="res://Assets/CharakterAssets/Enemies/BW/OrcChief-outline1.png" id="2_ll8nm"]
+[ext_resource type="Texture2D" uid="uid://bd4pk8hp7r3tg" path="res://Assets/CharakterAssets/Enemies/BW/OrcChief-outline2.png" id="3_67ojm"]
+[ext_resource type="Texture2D" uid="uid://cotbfcop7ryx5" path="res://Assets/CharakterAssets/Enemies/BW/OrcChief-outline3.png" id="4_71jq4"]
+[ext_resource type="Texture2D" uid="uid://wqrtvk5lpayg" path="res://Assets/CharakterAssets/Enemies/BW/OrcChief-outline4.png" id="5_a0vv6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kqn2d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ll8nm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_67ojm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_71jq4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_a0vv6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wni6g"]
-size = Vector2(14, 20)
+size = Vector2(34, 33)
 
-[node name="Zombie" type="CharacterBody2D"]
-script = ExtResource("1_0aj1m")
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_32lmq"]
+radius = 17.0
+height = 34.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_ssitg")
+[sub_resource type="CircleShape2D" id="CircleShape2D_8i705"]
+radius = 70.0286
+
+[node name="Zombie" type="CharacterBody2D" groups=["Enemy"]]
+script = ExtResource("1_hrl07")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(0.870588, 0.227451, 0.278431, 1)
+sprite_frames = SubResource("SpriteFrames_kqn2d")
+autoplay = "default"
+frame_progress = 0.359943
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_wni6g")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_32lmq")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="SearchCircle" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SearchCircle"]
+shape = SubResource("CircleShape2D_8i705")
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="child_entered_tree" from="Area2D/CollisionShape2D" to="." method="_on_collision_shape_2d_child_entered_tree"]
 [connection signal="tree_entered" from="Area2D/CollisionShape2D" to="." method="_on_collision_shape_2d_tree_entered"]
+[connection signal="area_entered" from="SearchCircle" to="." method="_on_search_circle_area_entered"]
+[connection signal="area_exited" from="SearchCircle" to="." method="_on_search_circle_area_exited"]
+[connection signal="body_entered" from="SearchCircle" to="." method="_on_search_circle_body_entered"]

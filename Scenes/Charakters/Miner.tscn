@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://qutuxi2jog8b"]
+
+[ext_resource type="Script" path="res://Scenes/Charakters/Miner.gd" id="1_ckppq"]
+[ext_resource type="Texture2D" uid="uid://bymyd4t024y0o" path="res://Assets/UI/RandIndic.png" id="2_moctl"]
+[ext_resource type="Texture2D" uid="uid://bijp6ie7b2dw" path="res://Assets/CharakterAssets/Charakters/Miner/Goblin-outline1.png" id="3_p7j7j"]
+[ext_resource type="Texture2D" uid="uid://cn387jadels1x" path="res://Assets/CharakterAssets/Charakters/Miner/Goblin-outline2.png" id="4_kgxrd"]
+[ext_resource type="Texture2D" uid="uid://bx828ku8np3d1" path="res://Assets/CharakterAssets/Charakters/Miner/Goblin-outline3.png" id="5_7uiol"]
+[ext_resource type="Texture2D" uid="uid://cje5wfmo30ch8" path="res://Assets/CharakterAssets/Charakters/Miner/Goblin-outline4.png" id="6_qoxhk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g0631"]
+radius = 60.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gg275"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_p7j7j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_kgxrd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7uiol")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qoxhk")
+}],
+"loop": true,
+"name": &"Standing",
+"speed": 4.0
+}]
+
+[node name="Node2D" type="Node2D" groups=["Miner"]]
+script = ExtResource("1_ckppq")
+
+[node name="Area2D" type="Area2D" parent="." groups=["Miner"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["Miner"]]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_g0631")
+
+[node name="RangeIndicator" type="Sprite2D" parent="Area2D"]
+position = Vector2(-2.6226e-06, 0)
+scale = Vector2(0.255489, 0.257028)
+texture = ExtResource("2_moctl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["Miner"]]
+position = Vector2(5.96046e-08, -5.36442e-07)
+scale = Vector2(1.25, 1.25)
+sprite_frames = SubResource("SpriteFrames_gg275")
+animation = &"Standing"
+autoplay = "Standing"
+frame_progress = 0.195102
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

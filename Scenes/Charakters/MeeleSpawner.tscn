@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c80bw1k6eqmhu"]
+
+[ext_resource type="Script" path="res://Scenes/Charakters/MeeleSpawner.gd" id="1_m4omb"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_m4omb")
